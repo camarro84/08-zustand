@@ -44,17 +44,17 @@ export default function Notes({ tag }: NoteProps) {
   if (isError) return <Error error={error} />
   if (!data) return <p>No note found</p>
 
+  const hasNotes = (data.notes?.length ?? 0) > 0
+
   return (
-    <>
-      <NotesPage
-        data={data}
-        currentPage={page - 1}
-        onPageChange={(idx) => setPage(idx + 1)}
-        onSearch={(v) => setRawSearch(v)}
-        onOpenCreate={() => router.push('/notes/action/create')}
-      >
-        <NoteList notes={data.notes ?? []} />
-      </NotesPage>
-    </>
+    <NotesPage
+      data={data}
+      currentPage={page}
+      onPageChange={(nextPage) => setPage(nextPage)}
+      onSearch={(v) => setRawSearch(v)}
+      onOpenCreate={() => router.push('/notes/action/create')}
+    >
+      {hasNotes ? <NoteList notes={data.notes!} /> : <p>No notes found.</p>}
+    </NotesPage>
   )
 }
