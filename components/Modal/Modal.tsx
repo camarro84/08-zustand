@@ -29,6 +29,30 @@ export default function Modal({ open, onClose, children }: Props) {
   return (
     <div className={css.backdrop} onClick={onClose}>
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
+        {/* верхняя полоса модалки */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginBottom: '16px',
+          }}
+        >
+          <button
+            type="button"
+            aria-label="Close modal"
+            onClick={onClose}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '24px',
+              lineHeight: 1,
+            }}
+          >
+            ×
+          </button>
+        </div>
+
         {children}
       </div>
     </div>
